@@ -1,0 +1,28 @@
+QCheckBox::indicator:enabled:unchecked {
+    image: url(:/images/unchecked.png);
+}
+QCheckBox::indicator:enabled:checked {
+    image: url(:/images/checked.png);
+}
+QFrame#frame {
+    border: 1px solid transparent; /* 初始状态下透明边框 */
+}
+
+QFrame#frame:hover {
+    border: 1px solid black; /* 鼠标悬停时显示黑色边框 */
+}
+QPushButton#btlock {
+    border: none;  /* 去除按钮的边框 */
+    background-image: url(:/images/unlock.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+QPushButton#btlock:released {
+    background-image: url(:/images/unlock.png);
+}
+
+QPushButton#btlock:checked  {
+    background-image: url(:/images/lock.png);  /* 设置按下时的背景图片 */
+}
