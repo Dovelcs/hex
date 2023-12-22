@@ -10,6 +10,24 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
+class QUInt64Validator : public QValidator {
+public:
+    QUInt64Validator(QObject *parent = nullptr) : QValidator(parent) {}
+
+    State validate(QString &input, int &pos) const override {
+        Q_UNUSED(pos);
+
+        bool ok;
+        quint64 value = input.toULongLong(&ok);
+
+        if (ok && value <= Q_UINT64_C(18446744073709551615)) {
+            return Acceptable;
+        } else {
+            return Invalid;
+        }
+    }
+};
+
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -47,15 +65,15 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    QCheckBox *checkBoxes[32];
-    QFrame * frames[32];
-    QIntValidator *validator;
-    QIntValidator *qvDecvd;
-    void setbox(quint32 value);
-    void getbox(quint32 &value);
+    QCheckBox *checkBoxes[64];
+    QFrame * frames[64];
+    QIntValidator  *validator;
+    QUInt64Validator  *qvDecvd;
+    void setbox(quint64 value);
+    void getbox(quint64 &value);
     void changtoLE(void);
-    void getlecont(quint32 &value);
+    void getlecont(quint64 &value);
     void freamrest(void);
-    void addhis(QString cmd,quint32 src,QString cent,quint32 dst);
+    void addhis(QString cmd,quint64 src,QString cent,quint64 dst);
 };
 #endif // WIDGET_H
